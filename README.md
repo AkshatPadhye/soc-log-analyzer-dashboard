@@ -1,4 +1,4 @@
-# soc-log-analyzer-dashboard
+# SOC-log-analyzer-dashboard
 This repository hosts a Log Analyzer Dashboard designed for cybersecurity monitoring and SOC (Security Operations Center) analysis. It provides a centralized, scalable, and analyst‑friendly platform for ingesting, parsing, visualizing, and investigating security‑relevant logs across diverse environments. Built for real‑time awareness and rapid incident response, the dashboard helps SOC teams transform raw log data into actionable intelligence.
 
 The system supports log collection from multiple sources, including firewalls, endpoint agents, IDS/IPS tools, cloud workloads, authentication systems, and application services. A flexible parsing pipeline normalizes logs into a consistent schema, enabling correlation across different technologies and vendors. The repository includes modular parsers, enrichment functions, and threat‑detection logic that can be easily extended to match organizational needs.
