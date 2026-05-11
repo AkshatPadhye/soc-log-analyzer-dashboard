@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>SOC Threat Monitoring Dashboard</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1 class="title glow">
+        SOC Threat Monitoring Dashboard
+    </h1>
+
+    <p class="subtitle">
+        Flask + Python Blue Team Security Monitoring Tool
+    </p>
+
+    <p class="timestamp">
+        Last Analysis:
+        {{ upload_time }}
+    </p>
+
+    <p class="attack-type">
+        Attack Detection:
+        {{ attack_type }}
+    </p>
+
+    <!-- Upload Form -->
+
+    <form method="POST"
+          enctype="multipart/form-data"
+          class="upload-form">
+
+        <input type="file"
+               name="logfile"
+               required>
+
+        <button type="submit">
+            Analyze Logs
+        </button>
+
+    </form>
+
+    {% if suspicious_ips %}
+
+    <!-- Dashboard Cards -->
+
+    <div class="cards">
+
+        <div class="card">
+            <h3>Total Failed Logins</h3>
+            <p>{{ total_failed }}</p>
+        </div>
+
+        <div class="card">
+            <h3>High Risk IPs</h3>
+            <p>{{ high_risk }}</p>
+        </div>
+
+        <div class="card">
+            <h3>Critical Threats</h3>
+            <p>{{ critical_risk }}</p>
+        </div>
+
+        <div class="card">
+            <h3>Unique Suspicious IPs</h3>
+            <p>{{ unique_ips }}</p>
+        </div>
+
+        <div class="card">
+            <h3>Threat Status</h3>
+
+            <p class="status">
+                {{ threat_status }}
+            </p>
+        </div>
+
+    </div>
+
+    <!-- Search Bar -->
+
+    <input type="text"
+           id="searchInput"
+           placeholder="Search IP Address..."
+           class="search-box">
+
+    <!-- Results Table -->
+
+    <div class="results">
+
+        <h2>Suspicious IP Activity</h2>
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>IP Address</th>
+
+                    <th>Failed Attempts</th>
+
+                    <th>Threat Level</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+            {% for entry in suspicious_ips %}
+
+                <tr>
+
+                    <td>{{ entry.ip }}</td>
+
+                    <td>{{ entry.attempts }}</td>
+
+                    <td class="{{ entry.severity|lower }}">
+
+                        {{ entry.severity }}
+
+                    </td>
+
+                </tr>
+
+            {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+<!-- Search Function -->
+
+<script>
+
+const searchInput = document.getElementById("searchInput");
+
+searchInput.addEventListener("keyup", function() {
+
+    let filter = searchInput.value.toLowerCase();
+
+    let rows = document.querySelectorAll("tbody tr");
+
+    rows.forEach(row => {
+
+        let ip = row.cells[0].textContent.toLowerCase();
+
+        if(ip.includes(filter)){
+
+            row.style.display = "";
+
+        }
+        else{
+
+            row.style.display = "none";
+
+        }
+
+    });
+
+});
+
+</script>
+
+</body>
+
+</html>
