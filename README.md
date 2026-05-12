@@ -81,6 +81,8 @@ Country
 Attack type
 AI Score + Confidence
 Timestamps
+<img width="1827" height="957" alt="Screenshot 2026-05-12 225236" src="https://github.com/user-attachments/assets/a9c1e4cf-3b88-414a-b4ba-a05b55f8b61a" />
+
 Malicious IP flag<img width="1762" height="775" alt="Screenshot 2026-05-12 222357" src="https://github.com/user-attachments/assets/1c825299-7ac4-4043-8976-5802f030116b" />
 <img width="1652" height="856" alt="Screenshot 2026-05-12 222801" src="https://github.com/user-attachments/assets/d3364928-3ab9-428d-865a-190409ecf1a5" />
 <img width="1688" height="287" alt="Screenshot 2026-05-12 224213" src="https://github.com/user-attachments/assets/abf1b986-84ca-486a-8267-b77a60e29e9c" />
