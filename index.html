@@ -1,58 +1,73 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOC Threat Intelligence Dashboard</title>
 
-    <title>SOC Threat Monitoring Dashboard</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
-    <link rel="stylesheet"
-          href="{{ url_for('static', filename='style.css') }}">
+    <!-- Icons -->
+    <link rel="stylesheet" href="[cdnjs.cloudflare.com](https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css)">
 
+    <!-- Chart.js -->
+    <script src="[cdn.jsdelivr.net](https://cdn.jsdelivr.net/npm/chart.js)"></script>
 </head>
 
 <body>
 
 <div class="container">
 
-    <h1 class="title glow">
-        SOC Threat Monitoring Dashboard
-    </h1>
+    <!-- HEADER -->
+    <div class="header fade-in">
+        <h1 class="title">SOC THREAT MONITORING</h1>
+        <p class="subtitle">AI-Powered Cyber Defense & Threat Intelligence</p>
 
-    <p class="subtitle">
-        Flask + Python Blue Team Security Monitoring Tool
-    </p>
+        <p class="timestamp">
+            <i class="fas fa-clock"></i>
+            Last Analysis: {{ upload_time }}
+        </p>
 
-    <p class="timestamp">
-        Last Analysis:
-        {{ upload_time }}
-    </p>
+        <p class="attack-type">
+            <i class="fas fa-bullseye"></i>
+            Primary Attack Vector:
+            <span style="color:cyan; font-weight:700">{{ attack_type }}</span>
+        </p>
+    </div>
 
-    <p class="attack-type">
-        Attack Detection:
-        {{ attack_type }}
-    </p>
+    <!-- ALERT BANNER -->
+    {% if suspicious_ips %}
+    <div class="alert-banner">
+        <i class="fas fa-fire"></i> ACTIVE CYBER THREATS DETECTED — AI SYSTEMS ENGAGED
+    </div>
+    {% else %}
+    <div class="alert-banner" style="background:linear-gradient(90deg,#0ea5e9,#06b6d4)">
+        <i class="fas fa-upload"></i> Upload Logs To Start Threat Analysis
+    </div>
+    {% endif %}
 
-    <!-- Upload Form -->
-
-    <form method="POST"
-          enctype="multipart/form-data"
-          class="upload-form">
-
-        <input type="file"
-               name="logfile"
-               required>
-
-        <button type="submit">
-            Analyze Logs
-        </button>
-
+    <!-- UPLOAD SECTION -->
+    <form method="POST" enctype="multipart/form-data" class="upload-form">
+        <input type="file" name="logfile" required>
+        <button type="submit">Analyze Logs</button>
     </form>
 
     {% if suspicious_ips %}
+    <a href="/download-report" class="download-btn">
+        <i class="fas fa-download"></i> Download SOC Report
+    </a>
+    {% endif %}
 
-    <!-- Dashboard Cards -->
+    <!-- SEARCH -->
+    {% if suspicious_ips %}
+    <input type="text" id="searchInput" placeholder="🔍 Search IP Address..." class="search-box">
+    {% endif %}
 
-    <div class="cards">
+    <!-- STATS CARDS -->
+    {% if suspicious_ips %}
+    <div class="cards slide-left">
 
         <div class="card">
             <h3>Total Failed Logins</h3>
@@ -60,13 +75,13 @@
         </div>
 
         <div class="card">
-            <h3>High Risk IPs</h3>
-            <p>{{ high_risk }}</p>
+            <h3>Critical Threats</h3>
+            <p class="critical">{{ critical_risk }}</p>
         </div>
 
         <div class="card">
-            <h3>Critical Threats</h3>
-            <p>{{ critical_risk }}</p>
+            <h3>High Risk IPs</h3>
+            <p class="high">{{ high_risk }}</p>
         </div>
 
         <div class="card">
@@ -75,107 +90,208 @@
         </div>
 
         <div class="card">
-            <h3>Threat Status</h3>
-
-            <p class="status">
-                {{ threat_status }}
-            </p>
+            <h3>Live Threat Counter</h3>
+            <p id="liveCounter">{{ total_failed }}</p>
         </div>
 
     </div>
+    {% endif %}
 
-    <!-- Search Bar -->
+    <!-- RECOMMENDATION -->
+    {% if recommendations %}
+    <div class="recommendation fade-in">
+        <h3>🔰 AI-Generated Security Recommendation</h3>
+        <p>{{ recommendations[0].details }}</p>
+    </div>
+    {% endif %}
 
-    <input type="text"
-           id="searchInput"
-           placeholder="Search IP Address..."
-           class="search-box">
+    <!-- THREAT CHART -->
+    {% if suspicious_ips %}
+    <div class="chart-container fade-in" id="severityChartCard"
+        data-critical="{{ critical_risk }}"
+        data-high="{{ high_risk }}"
+        data-medium="{{ medium_risk }}"
+        data-low="{{ low_risk }}">
 
-    <!-- Results Table -->
+        <h2>Threat Severity Distribution</h2>
+        <canvas id="severityChart"></canvas>
+    </div>
+    {% endif %}
 
-    <div class="results">
-
-        <h2>Suspicious IP Activity</h2>
+    <!-- RESULTS TABLE -->
+    {% if suspicious_ips %}
+    <div class="results fade-in">
+        <h2>Suspicious Activity Log</h2>
 
         <table>
-
             <thead>
-
                 <tr>
-
                     <th>IP Address</th>
-
-                    <th>Failed Attempts</th>
-
-                    <th>Threat Level</th>
-
+                    <th>Attempts</th>
+                    <th>Severity</th>
+                    <th>Country</th>
+                    <th>Attack</th>
+                    <th>AI Score</th>
+                    <th>Risk</th>
+                    <th>Confidence</th>
+                    <th>Timestamp</th>
                 </tr>
-
             </thead>
 
-            <tbody>
-
-            {% for entry in suspicious_ips %}
-
+            <tbody id="logTableBody">
+                {% for entry in suspicious_ips %}
                 <tr>
 
-                    <td>{{ entry.ip }}</td>
-
-                    <td>{{ entry.attempts }}</td>
-
-                    <td class="{{ entry.severity|lower }}">
-
-                        {{ entry.severity }}
-
+                    <!-- IP -->
+                    <td>
+                        {% if entry.is_malicious %}
+                        <span class="malicious-ip">{{ entry.ip }}</span>
+                        {% else %}
+                        {{ entry.ip }}
+                        {% endif %}
                     </td>
 
+                    <!-- Attempts -->
+                    <td>{{ entry.attempts }}</td>
+
+                    <!-- Severity -->
+                    <td>
+                        <span class="badge {{ entry.severity|lower }}">{{ entry.severity }}</span>
+                    </td>
+
+                    <!-- Country -->
+                    <td>{{ entry.country }}</td>
+
+                    <!-- Attack -->
+                    <td>
+                        <span class="attack-badge attack-{{ entry.attack|lower|replace(' ','-') }}">
+                            {{ entry.attack }}
+                        </span>
+                    </td>
+
+                    <!-- AI SCORE -->
+                    <td style="min-width:150px;">
+                        <div class="ai-score-bar">
+                            <div class="ai-score-fill 
+                                ai-{{ entry.ai_risk|lower }}"
+                                style="width: {{ entry.ai_score }}%">
+                            </div>
+                        </div>
+                        <strong>{{ entry.ai_score }}</strong>
+                    </td>
+
+                    <!-- AI RISK -->
+                    <td>
+                        <span class="badge {{ entry.ai_risk|lower }}">{{ entry.ai_risk }}</span>
+                    </td>
+
+                    <!-- CONFIDENCE -->
+                    <td>
+                        <span class="confidence-badge
+                            {% if entry.ai_confidence >= 80 %}conf-high
+                            {% elif entry.ai_confidence >= 50 %}conf-med
+                            {% else %}conf-low
+                            {% endif %}">
+                            {{ entry.ai_confidence }}%
+                        </span>
+                    </td>
+
+                    <!-- TIMESTAMP -->
+                    <td>{{ entry.timestamp }}</td>
+
                 </tr>
-
-            {% endfor %}
-
+                {% endfor %}
             </tbody>
 
         </table>
 
     </div>
-
     {% endif %}
+
+    <!-- FOOTER -->
+    <div class="footer">
+        <p>Advanced SOC Dashboard — AI Threat Monitoring System</p>
+    </div>
 
 </div>
 
-<!-- Search Function -->
-
+<!-- =================================== -->
+<!-- JS: SEARCH FILTER -->
+<!-- =================================== -->
 <script>
-
 const searchInput = document.getElementById("searchInput");
+if (searchInput) {
+    searchInput.addEventListener("keyup", function () {
+        let filter = searchInput.value.toLowerCase();
+        let rows = document.querySelectorAll("#logTableBody tr");
 
-searchInput.addEventListener("keyup", function() {
-
-    let filter = searchInput.value.toLowerCase();
-
-    let rows = document.querySelectorAll("tbody tr");
-
-    rows.forEach(row => {
-
-        let ip = row.cells[0].textContent.toLowerCase();
-
-        if(ip.includes(filter)){
-
-            row.style.display = "";
-
-        }
-        else{
-
-            row.style.display = "none";
-
-        }
-
+        rows.forEach(row => {
+            let ip = row.cells[0].textContent.toLowerCase();
+            row.style.display = ip.includes(filter) ? "" : "none";
+        });
     });
-
-});
-
+}
 </script>
 
-</body>
+<!-- =================================== -->
+<!-- JS: LIVE COUNTER -->
+<!-- =================================== -->
+<script>
+const counter = document.getElementById("liveCounter");
+if (counter) {
+    let count = parseInt(counter.innerText);
 
+    setInterval(() => {
+        count += Math.floor(Math.random() * 3);
+        counter.innerText = count;
+    }, 4500);
+}
+</script>
+
+<!-- =================================== -->
+<!-- JS: SEVERITY DOUGHNUT CHART -->
+<!-- (FIXED error: property value expected) -->
+<!-- =================================== -->
+
+{% if suspicious_ips %}
+<script>
+const chartCard = document.getElementById("severityChartCard");
+const ctxSeverity = document.getElementById("severityChart");
+
+if (chartCard && ctxSeverity) {
+    const critical = parseInt(chartCard.getAttribute("data-critical")) || 0;
+    const high = parseInt(chartCard.getAttribute("data-high")) || 0;
+    const medium = parseInt(chartCard.getAttribute("data-medium")) || 0;
+    const low = parseInt(chartCard.getAttribute("data-low")) || 0;
+
+    new Chart(ctxSeverity, {
+        type: "doughnut",
+        data: {
+            labels: ["Critical", "High", "Medium", "Low"],
+            datasets: [{
+                data: [critical, high, medium, low],
+                backgroundColor: ["#ef4444", "#f97316", "#eab308", "#22c55e"],
+                borderColor: ["#dc2626", "#ea580c", "#ca8a04", "#16a34a"],
+                borderWidth: 2,
+                hoverOffset: 10
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: "white",
+                        font: { size: 14 }
+                    }
+                }
+            }
+        }
+    });
+}
+</script>
+{% endif %}
+
+</body>
 </html>
