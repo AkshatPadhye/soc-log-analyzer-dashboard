@@ -1,22 +1,88 @@
-# SOC-log-analyzer-dashboard
-This repository hosts a Log Analyzer Dashboard designed for cybersecurity monitoring and SOC (Security Operations Center) analysis. It provides a centralized, scalable, and analyst‑friendly platform for ingesting, parsing, visualizing, and investigating security‑relevant logs across diverse environments. Built for real‑time awareness and rapid incident response, the dashboard helps SOC teams transform raw log data into actionable intelligence.
+🚨 SOC Threat Monitoring Dashboard — AI‑Powered Cyber Defense
+Modern SIEM‑Style Threat Analytics • Flask • Python • Chart.js • Cyberpunk UI
 
-The system supports log collection from multiple sources, including firewalls, endpoint agents, IDS/IPS tools, cloud workloads, authentication systems, and application services. A flexible parsing pipeline normalizes logs into a consistent schema, enabling correlation across different technologies and vendors. The repository includes modular parsers, enrichment functions, and threat‑detection logic that can be easily extended to match organizational needs.
+The SOC Threat Monitoring Dashboard is an advanced, AI‑assisted Blue‑Team tool designed to analyze server logs, detect malicious activity, score threat levels, and visualize real‑time cyberattacks in a glowing neon cyber‑themed UI.
 
-Dashboards provide clear visibility into patterns such as authentication anomalies, lateral movement attempts, network scanning behavior, unusual process execution, data exfiltration indicators, and privilege‑escalation events. Visualizations highlight trends over time, high‑risk IPs, top alerts, geolocation insights, and deviations from historical baselines. Analysts can pivot from aggregated metrics into raw event logs for deep investigation.
+This upgraded version includes:
 
-A rule‑based and behavioral analytics engine supports detection of known attack signatures as well as subtle suspicious activity. Integration with threat‑intelligence feeds enables automatic tagging of malicious domains, hashes, and IP addresses. Alert workflows allow analysts to triage events, add annotations, assign severity levels, and track remediation steps.
+AI Threat Scoring (0–100)
+Confidence scoring and malicious‑IP detection
+SQLi, Brute‑Force, Credential‑Stuffing, DDoS and Port‑Scan detection
+Dual threat visualization charts (Severity + AI Score)
+Automated SOC Recommendations
+Exportable Security Reports (CSV)
+Search + Filters (Severity / Attack Type)
+High‑tech cyberpunk UI with animations
+Works with any log format containing IPs
+✨ Features
+🔥 AI‑Powered Threat Analysis
+The dashboard calculates a weighted AI score using:
 
-The repository is structured for easy deployment in both small labs and large enterprise settings. It supports containerized deployment using Docker or Kubernetes, with optional connectors for Elasticsearch, Splunk, OpenSearch, Kafka, and other log pipelines. Configuration files and sample datasets are included to help new users get started quickly.
+Failed login density
+Threat signature matching
+Known malicious IP ranges
+Attack type classification
+Time‑based patterns (night attacks = higher score)
+SQL Injection payload detection
+TOR/NAT anonymity cluster identification
+Entropy‑based IP threat modeling
+Risk classification:
 
-Security and performance are prioritized: role‑based access control, secure API endpoints, and efficient data‑stream handling ensure safe and reliable operation even under heavy log volume. The codebase emphasizes clarity and maintainability, making it suitable for SOC teams, cybersecurity students, researchers, and organizations building their own monitoring stack.
+CRITICAL (85–100)
+HIGH (70–84)
+MEDIUM (50–69)
+LOW (30–49)
+MINIMAL (0–29)
+Each entry also includes an AI confidence score (0–99%).
 
-Overall, this Log Analyzer Dashboard provides a comprehensive, extensible foundation for continuous monitoring, threat detection, and investigative workflows within modern cybersecurity operations.
+📊 Dual Threat Visualization Charts
+Threat Severity Distribution (Doughnut)
+Top AI Scores (Horizontal Bar)
+Fully mobile‑responsive and dynamically color‑mapped.
 
+🛡️ Live SOC Dashboard Components
+Total failed logins
+Critical / high / medium / low threats
+Unique suspicious IPs
+Live‑incrementing attack counter
+Status categories:
+SECURE
+MONITORING
+ELEVATED
+HIGH ALERT
+CRITICAL ALERT
+CRITICAL EMERGENCY
+📁 Uploads & Analysis
+Upload any .log, .txt, or .csv file.
+The system extracts:
 
+IP Addresses
+Attempt Count
+Severity
+Country
+Attack Vector
+Timestamp
+AI Score / Risk / Confidence
+🧠 AI Recommendations Engine
+Based on threat level, attack type, and risk distribution, you receive multi‑priority SOC recommendations such as:
 
+Block hostile IPs
+Enable MFA
+Review logs for 24 hours
+Activate incident response protocol
+Engage DDoS mitigation
+📦 Exportable CSV Report
+Download a complete SOC Threat Report containing:
 
-<img width="1920" height="1020" alt="2026-05-11 (19)" src="https://github.com/user-attachments/assets/9db73b5b-c9cd-41e2-ae69-296ac11f13e0" />
-<img width="1920" height="1020" alt="2026-05-11 (17)" src="https://github.com/user-attachments/assets/42172462-ad9d-4348-ad2d-2cd1741d1e10" />
-<img width="1920" height="1020" alt="2026-05-11 (16)" src="https://github.com/user-attachments/assets/6891f84e-0796-4260-b8e9-9b9b6aadbf3d" />
-
+All IP details
+Attempts
+Severity
+Country
+Attack type
+AI Score + Confidence
+Timestamps
+Malicious IP flag<img width="1762" height="775" alt="Screenshot 2026-05-12 222357" src="https://github.com/user-attachments/assets/1c825299-7ac4-4043-8976-5802f030116b" />
+<img width="1652" height="856" alt="Screenshot 2026-05-12 222801" src="https://github.com/user-attachments/assets/d3364928-3ab9-428d-865a-190409ecf1a5" />
+<img width="1688" height="287" alt="Screenshot 2026-05-12 224213" src="https://github.com/user-attachments/assets/abf1b986-84ca-486a-8267-b77a60e29e9c" />
+<img width="1678" height="716" alt="Screenshot 2026-05-12 222840" src="https://github.com/user-attachments/assets/643decb5-1172-4312-8d21-69848ee9caa2" />
+<img width="1793" height="752" alt="Screenshot 2026-05-12 224156" src="https://github.com/user-attachments/assets/83089d52-e5ef-475c-91f2-64ffc2c8f1b1" />
