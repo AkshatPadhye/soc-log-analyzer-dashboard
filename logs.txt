@@ -40,3 +40,112 @@ Failed login from 91.198.174.192
 Failed login from 91.198.174.192
 Failed login from 91.198.174.192
 Successful login from 192.168.0.200
+[2025-05-01 10:22:14] Failed SSH login from 203.0.113.45
+[2025-05-01 10:22:40] Failed SSH login from 203.0.113.45
+[2025-05-01 10:23:01] Failed SSH login from 203.0.113.45
+[2025-05-01 10:24:11] Failed SSH login from 203.0.113.45
+[2025-05-01 10:25:55] Failed SSH login from 203.0.113.45
+
+[2025-05-01 10:26:14] Failed RDP login from 45.33.32.156
+[2025-05-01 10:26:55] Failed RDP login from 45.33.32.156
+[2025-05-01 10:27:33] Failed RDP login from 45.33.32.156
+
+[2025-05-01 10:30:12] Failed FTP login from 192.168.1.10
+[2025-05-01 10:30:55] Failed FTP login from 192.168.1.10
+
+[2025-05-01 10:32:01] Successful login from 192.168.1.20
+
+[2025-05-01 10:33:20] Failed SSH login from 172.16.0.15
+[2025-05-01 10:33:55] Failed SSH login from 172.16.0.15
+[2025-05-01 10:34:21] Failed SSH login from 172.16.0.15
+[2025-05-01 10:34:44] Failed SSH login from 172.16.0.15
+
+[2025-05-01 10:36:11] Successful login from 10.10.10.2
+
+[2025-05-01 10:38:15] Failed SMB login from 198.51.100.77
+[2025-05-01 10:38:45] Failed SMB login from 198.51.100.77
+
+[2025-05-01 10:40:20] Failed Telnet login from 91.198.174.192
+[2025-05-01 10:41:01] Failed Telnet login from 91.198.174.192
+[2025-05-01 10:41:33] Failed Telnet login from 91.198.174.192
+
+[2025-05-01 10:45:12] Successful login from 192.168.0.200
+2026-05-11 03:15:20 Failed password for root from 185.220.101.34 port 445 protocol ssh
+2026-05-11 03:15:21 Failed password for root from 185.220.101.34 port 445 protocol ssh
+2026-05-11 03:15:22 Failed password for root from 185.220.101.34 port 445 protocol ssh
+2026-05-11 03:15:23 Failed password for root from 185.220.101.34 port 445 protocol ssh
+2026-05-11 03:15:24 Failed password for root from 185.220.101.34 port 445 protocol ssh
+2026-05-11 03:15:26 Repeated brute-force behavior detected from 185.220.101.34
+
+2026-05-11 02:45:12 Failed login attempt from 45.155.205.90 – invalid user admin
+2026-05-11 02:45:14 Failed login attempt from 45.155.205.90 – invalid user admin
+2026-05-11 02:45:16 Failed login attempt from 45.155.205.90 – invalid user admin
+
+2026-05-11 02:12:55 SQL injection attempt detected from 203.0.113.45 — Payload: SELECT * FROM users WHERE user='admin' --
+2026-05-11 02:12:56 Additional malicious SQL activity from 203.0.113.45
+
+2026-05-11 01:57:40 Unauthorized access attempt from 91.198.174.192 — multiple invalid passwords
+2026-05-11 01:57:42 Unauthorized access attempt from 91.198.174.192 — invalid password
+2026-05-11 01:57:43 Unauthorized access attempt from 91.198.174.192 — invalid password
+
+2026-05-11 00:32:10 Failed authentication from 198.51.100.77 — user not found
+2026-05-11 00:32:14 Failed authentication from 198.51.100.77 — user not found
+2026-05-11 00:32:18 Failed authentication from 198.51.100.77 — user not found
+
+2026-05-11 00:00:12 Connection blocked from 178.128.88.92 — suspicious port scanning detected
+2026-05-11 00:00:14 Connection blocked from 178.128.88.92 — repeated scanning
+2026-05-11 00:00:15 Connection blocked from 178.128.88.92 — firewall rule triggered
+
+2026-05-10 23:45:05 Multiple failed login attempts from 104.248.50.87 — automated behavior detected
+2026-05-10 23:45:06 Multiple failed login attempts from 104.248.50.87 — automated behavior detected
+2026-05-10 23:45:07 Multiple failed login attempts from 104.248.50.87 — automated behavior detected
+
+2026-05-10 23:02:31 Suspicious activity from 45.33.32.156 — failed login
+2026-05-10 23:02:32 Suspicious activity from 45.33.32.156 — failed login
+2026-05-10 23:02:34 Suspicious activity from 45.33.32.156 — failed login
+2026-05-11 03:11:20 Failed password for root from 185.220.101.34 port 443 ssh2
+2026-05-11 03:11:21 Failed password for root from 185.220.101.34 port 443 ssh2
+2026-05-11 03:11:21 Failed password for root from 185.220.101.34 port 443 ssh2
+2026-05-11 03:11:22 Failed password for root from 185.220.101.34 port 443 ssh2
+2026-05-11 03:11:23 Failed password for root from 185.220.101.34 port 443 ssh2
+2026-05-11 03:11:24 Failed password for root from 185.220.101.34 port 443 ssh2
+2026-05-11 03:11:25 Failed password for root from 185.220.101.34 port 443 ssh2
+2026-05-11 03:11:26 Failed password for root from 185.220.101.34 port 443 ssh2
+2026-05-11 03:11:27 Failed password for root from 185.220.101.34 port 443 ssh2
+2026-05-11 03:11:28 Repeated brute-force attack from 185.220.101.34 detected
+
+2026-05-11 02:59:41 Suspicious automated login flood from 45.155.205.90 — 120 failed attempts detected
+2026-05-11 02:59:42 Suspicious automated login flood from 45.155.205.90 — 121 failed attempts detected
+2026-05-11 02:59:42 Credential stuffing sequence from 45.155.205.90 detected
+2026-05-11 02:59:43 Credential stuffing sequence from 45.155.205.90 detected
+
+2026-05-11 02:38:00 SQL Injection Payload from 203.0.113.45:
+    SELECT * FROM users WHERE user='admin' AND password='' OR '1'='1';
+2026-05-11 02:38:02 SQL Injection Burst from 203.0.113.45 — UNION SELECT NULL,NULL --
+2026-05-11 02:38:04 SQL Injection from 203.0.113.45 — DROP TABLE accounts;
+2026-05-11 02:38:05 Malicious SQL automation from 203.0.113.45 detected
+
+2026-05-11 02:05:10 Unauthorized root login attempt from 91.198.174.192 — invalid credentials
+2026-05-11 02:05:11 Unauthorized root login attempt from 91.198.174.192 — invalid credentials
+2026-05-11 02:05:12 Unauthorized root login attempt from 91.198.174.192 — invalid credentials
+2026-05-11 02:05:16 Excessive login failures from 91.198.174.192 triggered firewall rule
+
+2026-05-11 01:44:28 DDoS SYN flood behavior detected from 198.51.100.77 — 4500 packets in 30s
+2026-05-11 01:44:29 Continued malicious traffic from 198.51.100.77 — abnormal connection rate
+2026-05-11 01:44:30 System overload attempt from 198.51.100.77 — potential botnet origin
+
+2026-05-11 01:12:15 Port scanning detected from 178.128.88.92 — scanning ports 1–1024
+2026-05-11 01:12:16 Suspicious scanning pattern from 178.128.88.92
+2026-05-11 01:12:17 Automated enumeration from 178.128.88.92
+
+2026-05-11 00:58:00 Multiple malicious API requests from 104.248.50.87 — high frequency bot activity
+2026-05-11 00:58:01 Multiple malicious API requests from 104.248.50.87 — repeated attack vector
+2026-05-11 00:58:02 Multiple malicious API requests from 104.248.50.87 — WAF triggered
+
+2026-05-11 00:35:14 Remote exploit attempt detected from 45.33.32.156 — payload: ../../../etc/passwd
+2026-05-11 00:35:15 Remote exploit attempt detected from 45.33.32.156 — payload: ../../../../../var/log/auth
+2026-05-11 00:35:16 Remote exploit detected — exploitation automation suspected
+
+2026-05-11 00:10:00 Malicious TOR exit node attack detected from 171.25.193.78
+2026-05-11 00:10:01 Malicious TOR exit node attack detected from 171.25.193.78 — repeating pattern
+2026-05-11 00:10:03 Malicious TOR exit node attack detected from 171.25.193.78 — escalation noted
